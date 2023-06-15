@@ -6,3 +6,4 @@ export const Filter = ({ className, image, title, onClick }) => {
         </div>
     )
 }
+

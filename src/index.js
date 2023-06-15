@@ -5,7 +5,7 @@ import { HashRouter as Router } from 'react-router-dom';
 
 import './styles/index.scss';
 
-import { DataProvider } from './contex/DataContext';
+import { DataProvider } from './context/DataContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
