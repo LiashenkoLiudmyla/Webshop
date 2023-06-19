@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
-import filtersList from '../components/FilterList'
+import filtersList from '../components/FilterList';
+import { articlesData } from '../components/ArticlesData';
 
 const USER_KEY = 'user';
 
@@ -15,18 +16,17 @@ export const DataProvider = ({ children }) => {
   const [mealsInBasket, setMealsInBasket] = useState([]);
   const [activeElements, setActiveElements] = useState([]);
   const [scrollTopRef, setScrollTopRef] = useState(null);
-  
 
+  const [articlesList, setArticlesList] = useState(articlesData);
 
-
-  const addMealToBasket = ({ id, basketIcon:image, title, description, price }) => {
+  const addMealToBasket = ({ id, basketIcon: image, title, description, price }) => {
     const meal = {
-        id,
-        image,
-        title,
-        description,
-        price,
-        amount: 1
+      id,
+      image,
+      title,
+      description,
+      price,
+      amount: 1
     };
 
     setMealsInBasket(prev => [...prev, meal]);
@@ -76,21 +76,22 @@ export const DataProvider = ({ children }) => {
   }, [currentUser]);
 
   const contextValue = {
-    currentUser,
-    setCurrentUser,
-    mealType,
-    setMealType,
-    mealsInBasket,
-    setMealsInBasket,
-    addMealToBasket,
-    removeMealFromBasket,
-    increaseAmount,
-    decreaseAmount,
-    activeElements,
-    setActiveElements,
-    scrollToComponentTop,
-    setScrollTopRef,
-    filtersList,
+    currentUser: currentUser,
+    setCurrentUser: setCurrentUser,
+    mealType: mealType,
+    setMealType: setMealType,
+    mealsInBasket: mealsInBasket,
+    setMealsInBasket: setMealsInBasket,
+    addMealToBasket: addMealToBasket,
+    removeMealFromBasket: removeMealFromBasket,
+    increaseAmount: increaseAmount,
+    decreaseAmount: decreaseAmount,
+    activeElements: activeElements,
+    setActiveElements: setActiveElements,
+    scrollToComponentTop: scrollToComponentTop,
+    setScrollTopRef: setScrollTopRef,
+    filtersList: filtersList,
+    articlesList: articlesList,
   };
 
   return (
