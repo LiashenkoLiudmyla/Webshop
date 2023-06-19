@@ -1,6 +1,6 @@
-import React, { useState, useEffect, createContext } from "react";
-import filtersList from '../components/FilterList';
-import { articlesData } from '../components/ArticlesData';
+import React, { useState, useEffect, createContext, useMemo } from "react";
+import filtersList from '../components/FilterList'
+import { articlesData } from '../components/ArticlesData'
 
 const USER_KEY = 'user';
 
@@ -16,7 +16,6 @@ export const DataProvider = ({ children }) => {
   const [mealsInBasket, setMealsInBasket] = useState([]);
   const [activeElements, setActiveElements] = useState([]);
   const [scrollTopRef, setScrollTopRef] = useState(null);
-
   const [articlesList, setArticlesList] = useState(articlesData);
 
   const addMealToBasket = ({ id, basketIcon: image, title, description, price }) => {
@@ -75,24 +74,44 @@ export const DataProvider = ({ children }) => {
     localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
   }, [currentUser]);
 
-  const contextValue = {
-    currentUser: currentUser,
-    setCurrentUser: setCurrentUser,
-    mealType: mealType,
-    setMealType: setMealType,
-    mealsInBasket: mealsInBasket,
-    setMealsInBasket: setMealsInBasket,
-    addMealToBasket: addMealToBasket,
-    removeMealFromBasket: removeMealFromBasket,
-    increaseAmount: increaseAmount,
-    decreaseAmount: decreaseAmount,
-    activeElements: activeElements,
-    setActiveElements: setActiveElements,
-    scrollToComponentTop: scrollToComponentTop,
-    setScrollTopRef: setScrollTopRef,
-    filtersList: filtersList,
-    articlesList: articlesList,
-  };
+  const contextValue = useMemo(
+    () => ({
+      currentUser,
+      setCurrentUser,
+      mealType,
+      setMealType,
+      mealsInBasket,
+      setMealsInBasket,
+      addMealToBasket,
+      removeMealFromBasket,
+      increaseAmount,
+      decreaseAmount,
+      activeElements,
+      setActiveElements,
+      scrollToComponentTop,
+      setScrollTopRef,
+      filtersList,
+      articlesList,
+    }),
+    [
+      currentUser,
+      setCurrentUser,
+      mealType,
+      setMealType,
+      mealsInBasket,
+      setMealsInBasket,
+      addMealToBasket,
+      removeMealFromBasket,
+      increaseAmount,
+      decreaseAmount,
+      activeElements,
+      setActiveElements,
+      scrollToComponentTop,
+      setScrollTopRef,
+      filtersList,
+      articlesList,
+    ]
+  );
 
   return (
     <DataContext.Provider value={contextValue}>
